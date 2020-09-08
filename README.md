@@ -19,12 +19,19 @@
 ##Входящий вызов
 
 Вызов проходит следующие конексты при использовании Ring Group и маршрутизации DID
-Внешний SIP ->from-pstn ->from-pstn-custom
+Внешний SIP ->from-pstn ->from-pstn-custom 
 			->ext-did-post-custom
-			->from-did-direct
+			->from-did-direct ( --> ##ext-did-custom )
 			->ext-did-catchall 
 
 ##Исходящий вызов
+Внешний SIP ->from-internal ->from-internal-noxfer (-> from-internal-noxfer-custom
+							->from-internal-noxfer-additional)
+			->from-internal-xfer (->from-internal-custom 
+						-> from-internal-additional
+								-->> ##outbound-allroutes-custom)
+			->bad-number
+			
 
 
 
