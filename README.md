@@ -15,21 +15,21 @@
 | Файл логов службы - пишутся сервисом от имени пользователя PHP| /var/log/callmeplus.log | Как на PHP файлы | Как на PHP файлы | 644 | - |
 | Файл логов PHP - Пишут обработчики CallMeIn и CallMeOut | /var/log/callmeplus-php.log | Как на PHP файлы | Аналогично | 644 | - |
 
-#Схема работы
-##Входящий вызов
+# Схема работы
+## Входящий вызов
 
 Вызов проходит следующие конексты при использовании Ring Group и маршрутизации DID
 Внешний SIP ->from-pstn ->from-pstn-custom 
 			->ext-did-post-custom
-			->from-did-direct ( --> ##ext-did-custom )
+			->from-did-direct ( --> ## ext-did-custom )
 			->ext-did-catchall 
 
-##Исходящий вызов
+## Исходящий вызов
 Внешний SIP ->from-internal ->from-internal-noxfer (-> from-internal-noxfer-custom
 							->from-internal-noxfer-additional)
 			->from-internal-xfer (->from-internal-custom 
 						-> from-internal-additional
-								-->> ##outbound-allroutes-custom)
+								-->> ## outbound-allroutes-custom)
 			->bad-number
 			
 
