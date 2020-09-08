@@ -1,0 +1,18 @@
+[Unit]
+Description=CallMe
+
+[Service]
+WorkingDirectory=/var/www/html/callmeplus
+ExecStart=/usr/bin/php /var/www/html/callmeplus/CallMeIn.php 2>&1 >>/var/log/callmeplus.log
+ExecStop=/bin/kill -WINCH ${MAINPID}
+KillSignal=SIGKILL
+
+Restart=on-failure
+RestartSec=10s
+
+#тут надо смотреть,какие права на папки
+#User=www-data  #Ubuntu - debian
+#User=nginx #Centos
+
+[Install]
+WantedBy=multi-user.target
