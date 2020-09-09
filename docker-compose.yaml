@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  nginx:
+    image: nginx:1.15-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+  certbot:
+    image: certbot/certbot
+  freepbx:
+    image: flaviostutz/freepbx
+    ports:
+      - 88:80 # для настройки
+      - 5060:5060/udp
+      - 5160:5160/udp
+      - 127.0.0.1:5038:5038 # для CallMeOut.php
+#      - 3306:3306
+      - 18000-18100:18000-18100/udp
+    restart: always
+    environment:
+      - ADMIN_PASSWORD=admin123
+    volumes:
+      - backup:/backup
+      - recordings:/var/spool/asterisk/monitor
+      - ./callme:/var/www/html/callme
+      - ./systemd/callme.service:/etc/systemd/system/callme.conf
+      - ./asterisk/manager_custom.conf:/etc/asterisk/manager_custom.conf
+      - ./asterisk/extensions_custom.conf:/etc/asterisk/extensions_custom.conf
+#      - ./conf/startup.sh:/startup.sh
+
+volumes:
+  backup:
+  recordings:
