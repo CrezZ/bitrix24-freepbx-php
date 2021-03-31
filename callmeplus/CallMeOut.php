@@ -44,7 +44,8 @@ if(!empty($request)){
     } else {
         //проверяем авторизацию по токену
         if ($request['auth']['application_token'] === $authToken) {
-            $intNum = $helper->getIntNumByUSER_ID($request['data']['USER_ID']);
+
+            $intNum = $request['data']['extension'] ?: $helper->getIntNumByUSER_ID($request['data']['USER_ID']);
             $helper->writeToLog($intNum,'intnum');
             $CalledNumber = $request['data']['PHONE_NUMBER_INTERNATIONAL'];
             $helper->writeToLog($CalledNumber,'CalledNumber');

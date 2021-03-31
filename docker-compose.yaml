@@ -24,7 +24,7 @@ services:
     volumes:
       - backup:/backup
       - recordings:/var/spool/asterisk/monitor
-      - ./callme:/var/www/html/callme
+      - ./callmeplus:/var/www/html/callme
       - ./systemd/callme.service:/etc/systemd/system/callme.conf
       - ./asterisk/manager_custom.conf:/etc/asterisk/manager_custom.conf
       - ./asterisk/extensions_custom.conf:/etc/asterisk/extensions_custom.conf
